@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html lang="en" th:charset="UTF-8" xmlns:th="https://www.thymeleaf.org/">
+<!-- Basic -->
+<head th:replace="fragments :: header1">
+
+</head>
+
+<body>
+<!-- Start Main Top -->
+<div th:replace="fragments::main-top"></div>
+<!-- End Main Top -->
+
+<!-- Start Main Top -->
+<header th:replace="fragments::main-top21"></header>
+<!-- End Main Top -->
+<!-- Start Cart  -->
+<div class="all-title-box">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Thanh toán</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End All Title Box -->
+
+<!-- Start Cart  -->
+<div class="container">
+    <div class="row">
+        <div class="col d-flex justify-content-center">
+            <img class="img-fluid" th:src="@{img/check-out.png}">
+        </div>
+    </div>
+</div>
+<h1 class="text-center text-success ">Mua hàng thành công</h1>
+
+</div>
+<!-- End Cart -->
+</div>
+</div>
+<!-- End Cart -->
+
+<!-- Start Footer  -->
+<footer th:replace="fragments::footer"></footer>
+<div th:replace="fragments::script"></div>
+</body>
+
+</html>

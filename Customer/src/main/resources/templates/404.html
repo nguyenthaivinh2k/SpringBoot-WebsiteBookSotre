@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/" >
+
+<head th:replace="fragments :: header2">
+
+</head>
+
+<body class="bg-gradient-primary">
+
+<div class="container">
+
+    <!-- Outer Row -->
+    <div class="container-fluid">
+
+        <!-- 404 Error Text -->
+        <div class="text-center">
+            <div class="error mx-auto" data-text="404">404</div>
+            <p class="lead text-gray-800 mb-5">Page Not Found</p>
+            <a  class="text-gray-500 mb-0" th:href="@{/home}">&larr; Back to Home Page</a>
+        </div>
+
+    </div>
+
+</div>
+
+
+</body>
+
+</html>

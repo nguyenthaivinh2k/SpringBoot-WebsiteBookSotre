@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" th:charset="UTF-8" xmlns:th="https://www.thymeleaf.org/">
+<!-- Basic -->
+<head th:replace="fragments :: header1">
+</head>
+
+<body>
+<!-- Start Main Top -->
+<div th:replace="fragments::main-top"></div>
+<!-- End Main Top -->
+
+<!-- Start Main Top -->
+<header th:replace="fragments::main-top21"></header>
+<!-- End Main Top -->
+
+<!-- Start Top Search -->
+<div th:replace="fragments::top-search"></div>
+<!-- End Top Search -->
+
+<!-- Start Slider -->
+<div th:replace="fragments::slider"></div>
+<!-- End Slider -->
+
+<!-- Start Products  -->
+
+<!-- Fish -->
+<div class="products-box">
+    <div th:if="${category._activated==true}" th:each="category : ${categories}" class="container" >
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="title-all text-center">
+                    <h1 th:text="${category.name}"></h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="special-menu text-center">
+                    <div class="button-group filter-button-group">
+                        <button class="active" data-filter="*">All</button>
+                        <button data-filter=".best-seller">Best seller</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row special-list">
+            <div th:each="product : ${products}"
+                 th:if="${product.category.name == category.name && product._activated==true}"  class="col-lg-3 col-md-6 special-grid ">
+                <form th:action="@{/add-to-cart}"  method="get">
+                    <input type="hidden" th:value="${product.id}" name="id" >
+                    <div class="products-single fix">
+                    <div class="box-img-hover">
+                        <img  th:src="@{/img/image-product/__${product.image}__}" class="img-fluid"
+                             alt="Image">
+                        <div class="mask-icon">
+
+                            <ul>
+                                <li><a th:href="@{/find-product/{id}(id=${product.id})}" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+                            </ul>
+                            <a class="cart"><button onclick="addToCart()" type="submit " style="background: rgb(176 180 53)" href="#"> <i class="fa fa-shopping-bag"></i></button>Thêm vào giỏ hàng</a>
+                        </div>
+                    </div>
+                    <div class="why-text">
+                        <h4>[[${product.name}]]</h4>
+                        <h5 th:text="${product.costPrice}" class="price"></h5>
+                    </div>
+                </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<footer th:replace="fragments::footer"></footer>
+<div th:replace="fragments::script"></div>
+</body>
+
+</html>

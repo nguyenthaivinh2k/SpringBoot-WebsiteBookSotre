@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html lang="en" th:charset="UTF-8" xmlns:th="https://www.thymeleaf.org/">
+<!-- Basic -->
+<head th:replace="fragments :: header1">
+
+</head>
+
+<body>
+<!-- Start Main Top -->
+<div th:replace="fragments::main-top"></div>
+<!-- End Main Top -->
+
+<!-- Start Main Top -->
+<header th:replace="fragments::main-top22"></header>
+<!-- End Main Top -->
+
+<!-- Start Top Search -->
+<div th:replace="fragments::top-search"></div>
+<!-- End Top Search -->
+<!-- Start All Title Box -->
+<div class="all-title-box">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>My account</h2>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="home.html">Home</a></li>
+                    <li class="breadcrumb-item active"> My account</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End All Title Box -->
+
+<!-- Start My Account  -->
+<div class="container">
+    <div class="row my-2">
+        <div class="col-lg-4 order-lg-1 text-center">
+            <img th:src="@{/img/undraw_profile.svg}" width="200px" height="200px" class="mx-auto img-fluid img-circle d-block"
+                 alt="Profile picture" />
+        </div>
+        <div class="col-lg-8 order-lg-2">
+            <div class="tab-content py-4">
+                <div class="tab-pane active" id="profile">
+                    <h1><b>Thông tin cá nhân</b></h1>
+                    <form th:action="@{/edit-my-account/{id}(id=${customer.id})}" method="post"  enctype="multipart/form-data" class="form-horizontal" th:object="${customer}">
+                        <fieldset>
+                            <!-- Form Name -->
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="firstName">First Name</label>
+                                <div class="col-md-4">
+                                    <input pattern="[a-zA-Z]{3,10}" th:field="*{firstName}" id="firstName" name="product_name" class="form-control input-md" required
+                                           type="text" >
+
+                                </div>
+                            </div>
+                            <!-- Form Name -->
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="lastName">Last Name</label>
+                                <div class="col-md-4">
+                                    <input pattern="[a-zA-Z]{3,10}" th:field="*{lastName}" id="lastName" name="product_name" class="form-control input-md" required
+                                           type="text" >
+
+                                </div>
+                            </div>
+                            <!-- Form Name -->
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="email">Email</label>
+                                <div class="col-md-4">
+                                    <input type="email" th:field="*{username}" id="email" name="product_name" class="form-control input-md" required >
+
+                                </div>
+                            </div>
+                            <!-- Form Name -->
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="phone">Phone</label>
+                                <div class="col-md-4">
+                                    <input pattern="[0-9]{10}" th:field="*{phoneNumber}" id="phone" name="product_name" class="form-control input-md" required>
+
+                                </div>
+                            </div>
+                        </fieldset>
+                        <button type="submit" class="btn btn-primary">Cập nhật</button>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- End My Account -->
+
+<!-- Start Feed  -->
+
+<!-- End Feed  -->
+
+<!-- Start Footer  -->
+<footer th:replace="fragments::footer"></footer>
+<div th:replace="fragments::script"></div>
+
+</body>
+
+</html>

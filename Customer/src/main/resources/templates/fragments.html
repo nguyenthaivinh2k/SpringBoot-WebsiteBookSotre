@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en" th:charset="UTF-8" xmlns:th="https://www.thymeleaf.org/" xmlns:layout="">
+<head th:fragment="header1">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Site Metas -->
+  <title>[[${title}]]</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Site Icons -->
+  <link rel="shortcut icon"  th:href="@{/images/favicon.ico}" href="images/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" th:href="@{/images/apple-touch-icon.png}" href="images/apple-touch-icon.png">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="css/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet" th:href="@{/css/nice-select.css}" href="css/style.css" type="text/css">
+  <!-- Site CSS -->
+  <link rel="stylesheet" th:href="@{/css/style.css}" href="css/style.css" type="text/css">
+  <!-- Responsive CSS -->
+  <link rel="stylesheet"th:href="@{/css/responsive.css}" href="css/responsive.css" type="text/css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" th:href="@{/css/custom.css}"href="css/custom.css" type="text/css">
+
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+</head>
+<head th:fragment="header2">
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title th:text="${title}"></title>
+
+  <!-- Custom fonts for this template-->
+  <link th:href="@{/addCss/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link th:href="@{/addCss/css/sb-admin-2.min.css}" rel="stylesheet">
+
+</head>
+<body>
+<!-- Start Main Top -->
+<div th:fragment="main-top" class="main-top">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <div class="our-link">
+          <ul>
+            <li><a  th:text="${configDTO.phoneNumber}" href="#"></a></li>
+            <li><a  th:text="${configDTO.address}" href="#"><i class="fas fa-location-arrow"></i> </a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <div class="login-box">
+          <select id="acc" onchange="location=this.value" class="selectpicker form-control" >
+            <option> [[${session.username}]]</option>
+            <option th:if="${session.username =='Tài khoản'}" value="http://localhost:7070/shop/login">Đăng nhập</option>
+            <option th:if="${session.username =='Tài khoản'}" value="http://localhost:7070/shop/register">Đăng ký</option>
+            <option th:if="${session.username !='Tài khoản'}" value="http://localhost:7070/shop/my-account">Quản lý tài khoản</option>
+            <option th:if="${session.username !='Tài khoản'}" value="http://localhost:7070/shop/logout">Đăng xuất</option>
+          </select>
+        </div>
+        <div class="text-slid-box">
+          <div id="offer-box" class="carouselTicker">
+            <ul class="offer-box">
+              <li>
+                <i th:text="${configDTO.slide1}" class="fab fa-opencart"></i>
+              </li>
+              <li>
+                <i  th:text="${configDTO.slide2}" class="fab fa-opencart"></i>
+              </li>
+
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Main Top -->
+
+<!-- Start Main Top -->
+<header th:fragment="main-top21" class="main-header">
+  <!-- Start Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
+    <div class="container">
+      <!-- Start Header Navigation -->
+      <div class="navbar-header">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu"
+                aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fa fa-bars"></i>
+        </button>
+        <a class="navbar-brand"  th:href="@{/index}" href="index.html">
+          <img style="width: 28%;height: 28%" th:src="@{/img/image-logo/__${configDTO.getLogo()}__}" class="logo" width="180" height="150" alt=""></a>
+      </div>
+      <!-- End Header Navigation -->
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="navbar-menu">
+        <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
+          <li class="nav-item" th:classappend="${title =='Home Page'?'active':''}"><a class="nav-link" th:href="@{/home}" href="home.html">Trang chủ</a></li>
+
+          <li class="dropdown">
+            <a href="#" class="nav-link" data-toggle="dropdown">Thể loại</a>
+            <ul class="dropdown-menu">
+              <li><a th:each="c:${categories}" th:if="${c._activated==true}" th:href="@{/products-in-category/{id}(id=${c.id })}" href="shop.html">[[${c.name}]]</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="contact-us.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+
+      <!-- Start Atribute Navigation -->
+      <div class="attr-nav">
+        <ul>
+<!--          <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>-->
+          <li class="menu">
+            <a th:href="@{/cart}" href="#">
+              <i class="fa fa-shopping-bag"></i>
+<!--              <span class="badge">3</span>-->
+              Giỏ hàng
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- End Atribute Navigation -->
+    </div>
+    <!-- Start Side Menu -->
+<!--    <div class="side">-->
+<!--      <a href="#" class="close-side"><i class="fa fa-times"></i></a>-->
+<!--      <li class="cart-box">-->
+<!--        <ul class="cart-list">-->
+<!--          <li>-->
+<!--            <a href="#" class="photo"><img src="/static/img/image-product/1.jpg" class="cart-thumb"-->
+<!--                                           alt=""/></a>-->
+<!--            <h6><a href="#">Lobster rolls </a></h6>-->
+<!--            <p>1 - <span class="price">$80.00</span></p>-->
+<!--          </li>-->
+
+<!--        </ul>-->
+<!--      </li>-->
+<!--    </div>-->
+    <!-- End Side Menu -->
+  </nav>
+  <!-- End Navigation -->
+</header>
+<!-- Start Main Top -->
+<header th:fragment="main-top22" class="main-header">
+  <!-- Start Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
+    <div class="container">
+      <!-- Start Header Navigation -->
+      <div class="navbar-header">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu"
+                aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fa fa-bars"></i>
+        </button>
+        <a class="navbar-brand"  th:href="@{/index}" href="index.html"><img th style="width: 28%;height: 28%" th:src="@{/img/image-logo/__${configDTO.getLogo()}__}" h src="images/logo1.png" class="logo" width="180" height="150" alt=""></a>
+      </div>
+      <!-- End Header Navigation -->
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="navbar-menu">
+        <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
+          <li class="nav-item" th:classappend="${title =='Home Page'?'active':''}"><a class="nav-link" th:href="@{/home}" href="home.html">Trang chủ</a></li>
+
+          <li th:classappend="${title !='Home Page'?'active':''}" class="dropdown">
+            <a  href="#" class="nav-link" data-toggle="dropdown">Thể loại</a>
+            <ul class="dropdown-menu">
+              <li><a th:each="category :${categories}" th:text="${category.categoryName}" th:href="@{/products-in-category/{id}(id = ${category.getCategoryId} )}" href="shop.html"></a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="contact-us.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+
+      <!-- Start Atribute Navigation -->
+      <div class="attr-nav">
+        <ul>
+<!--          <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>-->
+          <li class="menu">
+            <a th:href="@{/cart}" href="#">
+              <i class="fa fa-shopping-bag"></i>
+<!--              <span class="badge">3</span>-->
+              Giỏ hàng
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- End Atribute Navigation -->
+    </div>
+    <!-- Start Side Menu -->
+<!--    <div class="side">-->
+<!--      <a href="#" class="close-side"><i class="fa fa-times"></i></a>-->
+<!--      <li class="cart-box">-->
+<!--        <ul class="cart-list">-->
+<!--          <li>-->
+<!--            <a href="#" class="photo"><img src="/static/img/image-product/1.jpg" class="cart-thumb"-->
+<!--                                           alt=""/></a>-->
+<!--            <h6><a href="#">Lobster rolls </a></h6>-->
+<!--            <p>1 - <span class="price">$80.00</span></p>-->
+<!--          </li>-->
+
+<!--        </ul>-->
+<!--      </li>-->
+<!--    </div>-->
+    <!-- End Side Menu -->
+  </nav>
+  <!-- End Navigation -->
+</header>
+<!-- End Main Top -->
+<!-- End Main Top -->
+
+<!-- Start Top Search -->
+<div th:fragment="top-search" class="top-search">
+  <div class="container">
+    <div class="input-group">
+      <span class="input-group-addon"><i class="fa fa-search"></i></span>
+      <input type="text" name="keyWord" class="form-control" placeholder="Search">
+      <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+    </div>
+  </div>
+</div>
+<!-- End Top Search -->
+
+<!-- Start Slider -->
+<div th:fragment="slider" class="all-title-box">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h2   th:text="${configDTO.slide2}"></h2>
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item"><a  th:text="${configDTO.slide1}" href="#"></a></li>
+<!--          <li class="breadcrumb-item active"> Menu</li>-->
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Slider -->
+
+<!-- Start Feed  -->
+<div th:fragment="feed" class="instagram-box">
+  <div class="main-instagram owl-carousel owl-theme">
+    <div class="item">
+      <div class="ins-inner-box">
+        <a href="index.html"><img src="images/Fish 01 - Fish Tacos.jpg" alt="" /></a>
+
+      </div>
+    </div>
+    <div class="item">
+      <div class="ins-inner-box">
+        <img src="images/instagram-img-02.jpg" alt="" />
+      </div>
+    </div>
+    <div class="item">
+      <div class="ins-inner-box">
+        <a href="index.html"><img src="images/Fish 04 - Red Pepper & Parmesan Tilapia.jpg" alt="" /></a>
+      </div>
+    </div>
+    <div class="item">
+      <div class="ins-inner-box">
+        <a href="index.html"><img src="images/Fish 05 - Almond-Topped Fish.jpg" alt="" /></a>
+      </div>
+    </div>
+    <div class="item">
+      <div class="ins-inner-box">
+        <a href="index.html"><img src="images/Shrimp 03 - Shrimp Tostadas with Avocado Salsa.jpg" alt="" /></a>
+      </div>
+    </div>
+    <div class="item">
+      <div class="ins-inner-box">
+        <a href="index.html"><img src="images/Shrimp 08 - Grilled Shrimp and Chorizo Appetizers.jpg" alt="" /></a>
+      </div>
+    </div>
+    <div class="item">
+      <div class="ins-inner-box">
+        <a href="index.html"><img src="images/Octopus 06 - Red Wine–Braised Baby Octopus with Black Olives.jpg" alt="" /></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Start Footer  -->
+<footer th:fragment="footer">
+  <div class="footer-main">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-md-12 col-sm-12">
+          <div class="footer-top-box">
+            <h3>Business Time</h3>
+            <ul class="list-time">
+              <li>[[${configDTO.timeForWork}]]</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-12 col-sm-12">
+          <div class="footer-top-box">
+            <h3>Contact Us</h3>
+            <ul class="list-time">
+              <li><i class="fas fa-phone-square"></i> [[${configDTO.phoneNumber}]]
+              </li>
+              <li><i class="fas fa-envelope"></i> [[${configDTO.email}]]
+              </li>
+              <li><i class="fas fa-map-marker-alt"></i> Đ/C: [[${configDTO.address}]]
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-12 col-sm-12">
+          <div class="footer-top-box">
+            <h3>Social Media</h3>
+            <p>Come with Ocean Prime shop - Only Fresh </p>
+            <ul>
+              <li><a href="#"><i class="fab fa-facebook"
+                                 aria-hidden="true"></i></a></li>
+              <li><a href="#"><i class="fab fa-twitter"
+                                 aria-hidden="true"></i></a></li>
+              <li><a href="#"><i class="fab fa-linkedin"
+                                 aria-hidden="true"></i></a></li>
+              <li><a href="#"><i class="fab fa-google-plus"
+                                 aria-hidden="true"></i></a></li>
+              <li><a href="#"><i class="fa fa-rss"
+                                 aria-hidden="true"></i></a></li>
+              <li><a href="#"><i class="fab fa-pinterest-p"
+                                 aria-hidden="true"></i></a></li>
+              <li><a href="#"><i class="fab fa-whatsapp"
+                                 aria-hidden="true"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</footer>
+<!-- ALL JS FILES -->
+<th:block  layout:fragments="script">
+<script th:src="@{/js/jquery-3.2.1.min.js}" src="js/jquery-3.2.1.min.js"></script>
+<script th:src="@{/js/popper.min.js}" src="js/popper.min.js"></script>
+<script th:src="@{/js/bootstrap.min.js}" src="js/bootstrap.min.js"></script>
+<!-- ALL PLUGINS -->
+<script th:src="@{/js/jquery.superslides.min.js}" src="js/jquery.superslides.min.js"></script>
+<script th:src="@{/js/bootstrap-select.js}" src="js/bootstrap-select.js"></script>
+<script th:src="@{/js/inewsticker.js}" src="js/inewsticker.js"></script>
+<script th:src="@{/js/bootsnav.js.}" src="js/bootsnav.js."></script>
+<script th:src="@{/js/images-loded.min.js}" src="js/images-loded.min.js"></script>
+<script th:src="@{/js/isotope.min.js}" src="js/isotope.min.js"></script>
+<script th:src="@{/js/owl.carousel.min.js}" src="js/owl.carousel.min.js"></script>
+<script th:src="@{/js/baguetteBox.min.js}" src="js/baguetteBox.min.js"></script>
+<script th:src="@{/js/form-validator.min.js}" src="js/form-validator.min.js"></script>
+<script th:src="@{/js/contact-form-script.js}" src="js/contact-form-script.js"></script>
+<script th:src="@{/js/custom.js}" src="js/custom.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <!--  custom jsp-->
+  <script th:src="@{/myJs/products.js}"></script>
+  <script th:src="@{/myJs/login.js}"></script>
+  <script th:src="@{/myJs/cart.js}"></script>
+</th:block>
+
+<div th:fragment="nav-product" class="product-item-filter row">
+  <div class="col-12 col-sm-8 text-center text-sm-left">
+    <div class="toolbar-sorter-right">
+      <span>Sort by </span>
+      <select onchange="location=this.value" id="basic" class="selectpicker  form-control" data-placeholder="đ">
+        <option>Filter</option>
+        <option  value="http://localhost:7070/shop/high-price">High Price → Low Price</option>
+        <option  value="http://localhost:7070/shop/low-price">Low Price → High Price</option>
+      </select>
+    </div>
+    <p></p>
+  </div>
+  <div class="col-12 col-sm-4 text-center text-sm-right">
+    <ul class="nav nav-tabs ml-auto">
+      <li>
+        <a class="nav-link active" href="#grid-view" data-toggle="tab"> <i
+                class="fa fa-th"></i> </a>
+      </li>
+      <li>
+        <a class="nav-link" href="#list-view" data-toggle="tab"> <i
+                class="fa fa-list-ul"></i> </a>
+      </li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>

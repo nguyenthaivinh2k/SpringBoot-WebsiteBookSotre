@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" th:charset="UTF-8" xmlns:th="https://www.thymeleaf.org/">
+<!-- Basic -->
+<head th:replace="fragments :: header1">
+
+</head>
+
+<body>
+<!-- Start Main Top -->
+<div th:replace="fragments::main-top"></div>
+<!-- End Main Top -->
+
+<!-- Start Main Top -->
+<header th:replace="fragments::main-top21"></header>
+<!-- End Main Top -->
+<!-- Start Cart  -->
+<div class="cart-box-main">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div th:if="${check}" class="alert alert-warning"><p th:text="${check}"></p></div>
+                <div th:if="${check==null}" class="table-main table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Images</th>
+                            <th>Product Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                            <th>Remove</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="cartItem:${shoppingCart}">
+
+                            <td class="thumbnail-img">
+                                <a th:href="@{/find-product/{id}(id=${cartItem.product.id})}" href="#">
+                                    <img class="img-fluid" th:src="@{/img/image-product/__${cartItem.product.image}__}" alt="" />
+                                </a>
+                            </td>
+                            <td class="name-pr">
+                                <a th:text="${cartItem.product.name}"> </a>
+                            </td>
+                            <td class="price-pr">
+                                <p class="price" th:text="${cartItem.product.costPrice}"></p>
+                            </td>
+                            <form th:action="@{update-cart}" method="get">
+                                <input type="hidden" th:value="${cartItem.product.id}" name="id" >
+                                <td class="quantity-box">
+                                    <input style="width: 50%;" name="quantity" type="number" size="4" th:value="${cartItem.quantity}" min="0" step="1" class="c-input-text qty text"></td>
+                                <td class="total-pr">
+                                    <p id="totalPriceItem" class="price" th:text="${cartItem.totalPrice}"></p>
+                                </td>
+                                <td class="remove-pr">
+<!--                                    <button type="submit" name="action" value="update" href="#">-->
+<!--                                        Update-->
+<!--                                    </button>-->
+                                    <button type="submit" name="action" href="#">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </td>
+                            </form>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row my-5">
+            <div class="col-lg-6 col-sm-6">
+                <div class="coupon-box">
+                    <div class="input-group input-group-sm">
+                        <input class="form-control" placeholder="Enter your coupon code" aria-label="Coupon code" type="text">
+                        <div class="input-group-append">
+                            <button class="btn btn-theme" type="button">Apply Coupon</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-6">
+                <div class="update-box">
+                    <a th:href="@{/delete-all-cartItem}" ><input value="Clear All" type="submit"></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row my-5">
+            <div class="col-lg-8 col-sm-12"></div>
+            <div class="col-lg-4 col-sm-12">
+                <div class="order-box">
+                    <h3>Order summary</h3>
+                    <div class="d-flex">
+                        <h4>Sub Total</h4>
+                        <div id="subTotal" class="price ml-auto font-weight-bold" >[[${cart.totalPrice}]]</div>
+                    </div>
+                    <div class="d-flex">
+                        <h4>Discount</h4>
+                        <div class="ml-auto font-weight-bold"> 0đ </div>
+                    </div>
+                    <hr class="my-1">
+                    <div class="d-flex">
+                        <h4>Coupon Discount</h4>
+                        <div class="ml-auto font-weight-bold"> 0đ </div>
+                    </div>
+                    <div class="d-flex">
+                        <h4>Tax</h4>
+                        <div class="ml-auto font-weight-bold"> 0đ </div>
+                    </div>
+                    <div class="d-flex">
+                        <h4>Shipping Cost</h4>
+                        <div class="ml-auto font-weight-bold"> Free </div>
+                    </div>
+                    <hr>
+                    <div class="d-flex gr-total">
+                        <h5>Grand Total</h5>
+                        <div id="grandTotal" class="price ml-auto h5">[[${cart.totalPrice}]]</div>
+                    </div>
+                    <hr> </div>
+            </div>
+            <div class="col-12 d-flex shopping-box"><a th:href="@{/check-out}" class="ml-auto btn hvr-hover">Thanh toán</a> </div>
+        </div>
+
+    </div>
+</div>
+<!-- End Cart -->
+
+<!-- Start Feed  -->
+
+<!-- End Feed  -->
+
+<!-- Start Footer  -->
+<footer th:replace="fragments::footer"></footer>
+
+<div th:replace="fragments::script"></div>
+<script th:inline="javascript">
+
+</script>
+</body>
+
+</html>

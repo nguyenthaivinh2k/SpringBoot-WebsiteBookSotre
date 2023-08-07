@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+<html lang="en" th:charset="UTF-8" xmlns:th="https://www.thymeleaf.org/">
+<!-- Basic -->
+<head th:replace="fragments :: header1">
+
+</head>
+
+<body>
+<!-- Start Main Top -->
+<div th:replace="fragments::main-top"></div>
+<!-- End Main Top -->
+
+<!-- Start Main Top -->
+<header th:replace="fragments::main-top22"></header>
+<!-- End Main Top -->
+
+<!-- Start Top Search -->
+<div th:replace="fragments::top-search"></div>
+<!-- End Top Search -->
+<!-- Start All Title Box -->
+<div class="all-title-box">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>My account</h2>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="home.html">Home</a></li>
+                    <li class="breadcrumb-item active"> My account</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End All Title Box -->
+
+<!-- Start My Account  -->
+<div class="container">
+    <div class="row my-2">
+        <div class="col-lg-4 order-lg-1 text-center">
+            <img th:src="@{/img/undraw_profile.svg}" width="200px" height="200px" class="mx-auto img-fluid img-circle d-block"
+                 alt="Profile picture" />
+        </div>
+
+        <div class="col-lg-8 order-lg-2">
+            <div class="tab-content py-4">
+                <div class="tab-pane active" id="profile">
+                    <div th:if="${success}" class="alert alert-success text-center">
+                        <p th:text="${success}"></p>
+                    </div>
+                    <h1><b>Thông tin cá nhân</b></h1>
+                    <h2 th:text="${name}"> <span style="font-size: medium;"></span></h2>
+                    <h4>Email: <span th:text="${email}"></span></h4>
+                    <h4>SĐT: <span th:text="${phone}"></span></h4>
+                    <h4>Địa chỉ: Thủ đức, TP.HCM, Việt Nam</h4>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="my-account-box-main">
+    <div class="container">
+        <div class="my-account-page">
+            <div class="row">
+                <div class="col-lg-4 col-md-12">
+                    <div class="account-box">
+                        <div class="service-box">
+                            <div class="service-icon">
+                                <a href="" th:href="@{/my-orders}"> <i class="fa fa-gift"></i> </a>
+                            </div>
+                            <div class="service-desc">
+                                <h4>Orders</h4>
+                                <p>Lịch sử mua hàng, hóa đơn</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <div class="account-box">
+                        <div class="service-box">
+                            <div class="service-icon">
+                                <a href="" th:href="@{/edit-my-account/{id}(id=${customerId})}"><i class="fa fa-lock"></i> </a>
+                            </div>
+                            <div class="service-desc">
+                                <h4>Login &amp; security</h4>
+                                <p>Chỉnh sửa email, tên, số điện thoại</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <div class="account-box">
+                        <div class="service-box">
+                            <div class="service-icon">
+                                <a href="#"> <i class="fa fa-location-arrow"></i> </a>
+                            </div>
+                            <div class="service-desc">
+                                <h4>Địa chỉ</h4>
+                                <p>Chỉnh sửa địa chỉ</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End My Account -->
+
+<!-- Start Feed  -->
+
+<!-- End Feed  -->
+
+<!-- Start Footer  -->
+<footer th:replace="fragments::footer"></footer>
+<div th:replace="fragments::script"></div>
+
+</body>
+
+</html>

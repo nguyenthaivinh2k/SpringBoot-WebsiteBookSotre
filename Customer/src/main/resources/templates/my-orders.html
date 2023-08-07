@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="en" th:charset="UTF-8" xmlns:th="https://www.thymeleaf.org/">
+<!-- Basic -->
+<head th:replace="fragments :: header1">
+
+</head>
+
+<body>
+<!-- Start Main Top -->
+<div th:replace="fragments::main-top"></div>
+<!-- End Main Top -->
+
+<!-- Start Main Top -->
+<header th:replace="fragments::main-top22"></header>
+<!-- End Main Top -->
+
+<!-- Start Top Search -->
+<div th:replace="fragments::top-search"></div>
+<!-- End Top Search -->
+<!-- Start All Title Box -->
+<div class="all-title-box">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>My orders</h2>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="home.html">Home</a></li>
+                    <li class="breadcrumb-item active"> My orders</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End All Title Box -->
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <!--                    <h1 class="h3 mb-4 text-gray-800">Buttons</h1>-->
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Ngày thanh toán</th>
+            <th scope="col">Ngày giao hàng</th>
+            <th scope="col">Tổng tiền</th>
+            <th scope="col">Phương thức thanh toán</th>
+            <th scope="col">Trạng thái</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="order : ${orders}">
+            <td th:text="${order.oderDate}"></td>
+            <td th:text="${order.deliveryDate}"></td>
+            <td class="price" th:text="${order.totalPrice}"></td>
+            <td> Thanh toán khi nhận hàng</td>
+            <td>Đang vận chuyển</td>
+        </tr>
+
+        </tbody>
+    </table>
+
+</div>
+<!-- /.container-fluid -->
+<!-- Start Feed  -->
+
+<!-- End Feed  -->
+
+<!-- Start Footer  -->
+<footer th:replace="fragments::footer"></footer>
+<div th:replace="fragments::script"></div>
+
+</body>
+
+</html>
