@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/" >
+
+<head th:replace="fragments :: header">
+
+</head>
+
+<body class="bg-gradient-primary">
+
+<div class="container">
+
+    <!-- Outer Row -->
+    <div class="container-fluid">
+
+        <!-- 404 Error Text -->
+        <div class="text-center">
+            <div class="error mx-auto" >Cảnh báo</div>
+            <p class="lead text-white-800 mb-5" style="color: white">Bạn không có đủ quyền hạn để truy cập trang này</p>
+            <a  class="text-gray-500 mb-0" th:href="@{/index}">&larr; Back to Dashboard</a>
+        </div>
+
+    </div>
+
+</div>
+
+<div th:replace = "fragments::script"></div>>
+
+</body>
+
+</html>

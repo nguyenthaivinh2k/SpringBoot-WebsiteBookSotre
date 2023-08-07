@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/" lang="en" th:charset="UTF-8" >
+<meta charset="UTF-8">
+<head th:replace="fragments::header">
+</head>
+
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul th:replace="fragments::sidebar"></ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <nav th:replace="fragments::topbar"></nav>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <!-- Page Heading -->
+                <!--                    <h1 class="h3 mb-4 text-gray-800">Buttons</h1>-->
+                <form th:action="@{/search-result/1}" method="get">
+                <div class="input-group">
+                    <div class="form-outline">
+                        <input id="search" name="keyWord" placeholder="Tìm kiếm..." type="search"  class="form-control" />
+                    </div>
+                    <button id="search-button" type="submit" class="btn btn-primary">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                </form>
+<br>
+                <a th:href="@{/add-product}" type="button" class="btn btn-primary">Thêm sản phẩm</a>
+                <button  id="firstDeleteButton" type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" >
+                    Xóa
+                </button>
+                    <button class="btn btn-dark dropdown-toggle" type="button" data-toggle="dropdown">...
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="btn btn-primary" th:href="@{/all-products}">Hiện tất cả sản phẩm</a></li>
+                    </ul>
+                <div th:if="${size ==0}">
+                    <p>Không có sản phẩm nào</p>
+                </div>
+                <div th:if="${success}" class="alert alert-success text-center">
+                    <p th:text="${success}"></p>
+                </div>
+                <div th:if="${failed}" class="alert alert-danger text-center">
+                    <p th:text="${failed}"></p>
+                </div>
+                <table  th:if="${size>0}" class=" table-sortable table table-striped">
+                    <thead>
+                    <tr>
+                        <th><input type="checkbox" id="selectedAllItems" name="selectedAllItems"/></th>
+                        <th scope="col">STT</th>
+                        <th scope="col">Ảnh</th>
+                        <th scope="col">Tên</th>
+                        <th scope="col">Thể loại</th>
+                        <th scope="col">Giá</th>
+                        <th scope="col">SL</th>
+                        <th scope="col">Sửa/Xóa</th>
+                        <th scope="col">Trạng thái</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="product : ${products}">
+                        <td><input type="checkbox" class="selectedItems" name="selectedItems" th:value="${product.id}"/></td>
+                        <td>#[[${products.indexOf(product)+1}]]</td>
+                        <!--                        <td><img src="" style="height: 40px;width: 40px" th:src="*{'data:image/jpeg;base64,'+ {product.image}}"></td>-->
+                        <td><img src="" style="height: 60px;width: 60px"
+                                 th:src="@{/img/image-product/__${product.image}__}"></td>
+                        <td th:text="${product.name}"></td>
+                        <td th:text="${product.category.name}"></td>
+                        <td class="price">[[${product.costPrice}]]</td>
+                        <td th:text="${product.currentQuantity}"></td>
+                        <td><a type="button" th:href="@{/update-product/{id}(id=${product.id})}"
+                               class="btn btn-primary">Chỉnh sửa</a></td>
+                        <td><a th:if="${product._activated==true}" class="btn btn-success"
+                               title="Nhấn vào đây để tạm ẩn sản phẩm"
+                               th:href="@{/delete-product/{id}(id = ${product.id})}">Đang hoạt động</a>
+                            <a th:if="${product.is_activated()==false}" class="btn btn-warning"
+                               title="Nhấn vào đây để cho phép sản phẩm hoạt động"
+                               th:href="@{/enable-product/{id}(id=${product.id})}">Đang tạm ẩn</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+
+
+        <!-- Footer -->
+        <footer th:replace="fragments::footer"></footer>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a th:replace="fragments::scroll"></a>
+<!-- Logout Modal-->
+<div th:replace="fragments::logoutModal"></div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thông báo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Bạn muốn xóa <span id="selectedItemsCount"></span> sản phẩm ?
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                <button id="deleteButton" type="button" class="btn btn-danger">Xác nhận xóa</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="fragments::script"></div>
+<script>
+    function sortTableByColumn(table, column, asc = true) {
+        const dirModifier = asc ? 1 : -1;
+        const tBody = table.tBodies[0];
+        const rows = Array.from(tBody.querySelectorAll("tr"));
+
+        // Sort each row
+        const sortedRows = rows.sort((a, b) => {
+            const aColText = a.querySelector(`td:nth-child(${ column + 1 })`).textContent.trim();
+            const bColText = b.querySelector(`td:nth-child(${ column + 1 })`).textContent.trim();
+
+            return aColText > bColText ? (1 * dirModifier) : (-1 * dirModifier);
+        });
+
+        // Remove all existing TRs from the table
+        while (tBody.firstChild) {
+            tBody.removeChild(tBody.firstChild);
+        }
+
+        // Re-add the newly sorted rows
+        tBody.append(...sortedRows);
+
+        // Remember how the column is currently sorted
+        table.querySelectorAll("th").forEach(th => th.classList.remove("th-sort-asc", "th-sort-desc"));
+        table.querySelector(`th:nth-child(${ column + 1})`).classList.toggle("th-sort-asc", asc);
+        table.querySelector(`th:nth-child(${ column + 1})`).classList.toggle("th-sort-desc", !asc);
+    }
+
+    document.querySelectorAll(".table-sortable th").forEach(headerCell => {
+        headerCell.addEventListener("click", () => {
+            const tableElement = headerCell.parentElement.parentElement.parentElement;
+            const headerIndex = Array.prototype.indexOf.call(headerCell.parentElement.children, headerCell);
+            const currentIsAscending = headerCell.classList.contains("th-sort-asc");
+
+            sortTableByColumn(tableElement, headerIndex, !currentIsAscending);
+        });
+    });
+
+</script>
+</body>
+
+</html>

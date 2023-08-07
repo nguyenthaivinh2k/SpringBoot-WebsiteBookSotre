@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/"  lang="en" th:charset="UTF-8">
+<meta charset="UTF-8">
+<head th:replace="fragments::header">
+</head>
+
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul th:replace="fragments::sidebar"></ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <nav th:replace="fragments::topbar"></nav>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+<!--                <div th:if="${failed}" class="alert alert-danger text-center">-->
+<!--                    <p th:text="${failed}"></p>-->
+<!--                </div>-->
+<!--                <div th:if="${success}" class="alert alert-success text-center">-->
+<!--                    <p th:text="${success}"></p>-->
+<!--                </div>-->
+                <!-- Page Heading -->
+                <!--                    <h1 class="h3 mb-4 text-gray-800">Buttons</h1>-->
+                <form th:action="@{/update-config}" method="post" enctype="multipart/form-data" class="form-horizontal"  th:object="${configDTO}">
+                    <fieldset>
+
+                        <!-- Form Name -->
+                        <legend>SETTING</legend>
+
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <!-- File Button -->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="logo">LOGO</label>
+                                    <div class="col-md-4">
+                                        <input id="logo" name="imageLogo" class="input-file" type="file">
+                                    </div>
+                                </div>
+                                <div id="image-container"></div>
+                                <img id="presentImageProduct2" th:src="@{/img/image-logo/__${configDTO.getLogo()}__}"  >
+                            </div>
+                        </div>
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="phoneNumber">Phone Number</label>
+                            <div class="col-md-4">
+                                <input th:field="*{phoneNumber}" id="phoneNumber" name="product_name" class="form-control input-md" required=
+                                       type="text">
+
+                            </div>
+                        </div>
+
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="email">Email</label>
+                            <div class="col-md-4">
+                                <input  th:field="*{email}"   id="email" name="description" class="form-control input-md" required=""
+                                          type="text"></input>
+
+                            </div>
+                        </div>
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="address">Address</label>
+                            <div class="col-md-4">
+                                <input  th:field="*{address}"   id="address" name="description" class="form-control input-md" required=""
+                                           type="text"></input>
+
+                            </div>
+                        </div>
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="timeForWork">Business Time</label>
+                            <div class="col-md-4">
+                                <input  th:field="*{timeForWork}"   id="timeForWork" name="description" class="form-control input-md" required=""
+                                           type="text"></input>
+
+                            </div>
+                        </div>
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="slide1">Slide 1</label>
+                            <div class="col-md-4">
+                                <input  th:field="*{slide1}"   id="slide1" name="description" class="form-control input-md" required=""
+                                           type="text"></input>
+
+                            </div>
+                        </div>
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="slide2">Slide 2</label>
+                            <div class="col-md-4">
+                                <input  th:field="*{slide2}"   id="slide2" name="description" class="form-control input-md" required=""
+                                           type="text"></input>
+
+                            </div>
+                        </div>
+
+                    </fieldset>
+
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </form>
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer th:replace="fragments::footer"></footer>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a th:replace="fragments::scroll"></a>
+<!-- Logout Modal-->
+<div th:replace="fragments::logoutModal"></div>
+<div th:replace="fragments::script"></div>
+
+</body>
+
+</html>

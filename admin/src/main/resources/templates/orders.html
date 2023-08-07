@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments::header">
+</head>
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul th:replace="fragments::sidebar"></ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <nav th:replace="fragments::topbar"></nav>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <!--                    <h1 class="h3 mb-4 text-gray-800">Buttons</h1>-->
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Khách hàng</th>
+                        <th scope="col">Ngày thanh toán</th>
+                        <th scope="col">Ngày giao hàng</th>
+                        <th scope="col">Tổng tiền</th>
+                        <th scope="col">Phương thức thanh toán</th>
+                        <th scope="col">Trạng thái</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td >vinh</td>
+                        <td >2023-06-05 01:10:14.0</td>
+                        <td >2023-06-05 01:55:52.0</td>
+                        <td>100.000đ</td>
+                        <td> Thanh toán khi nhận hàng</td>
+                        <td><a class="btn btn-success" >Đã giao hàng</a></td>
+                    </tr>
+                    <tr th:each="order : ${orders}">
+                        <td th:text="${order.customer.lastName}"></td>
+                        <td th:text="${order.oderDate}"></td>
+                        <td th:text="${order.deliveryDate}"></td>
+                        <td class="price" th:text="${order.totalPrice}"></td>
+                        <td> Thanh toán khi nhận hàng</td>
+                        <td><a class="btn btn-primary" >Đang vận chuyển</a></td>
+                    </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer th:replace="fragments::footer"></footer>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a th:replace="fragments::scroll"></a>
+<!-- Logout Modal-->
+<div th:replace="fragments::logoutModal"></div>
+<div th:replace="fragments::script"></div>
+</body>
+
+</html>
